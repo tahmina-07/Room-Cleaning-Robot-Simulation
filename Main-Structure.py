@@ -95,6 +95,7 @@ class RectangularRoom(object):
         """
         self.m = m
         self.n = n
+
         
         point = (self.m, self.n)
         if point in  self.cleaned_tiles:
@@ -138,3 +139,18 @@ class RectangularRoom(object):
             return True
         else:
             return False 
+
+class Robot(object):
+    """
+    Represents a robot cleaning a particular room.
+    """
+    def __init__(self, room, speed):
+        """
+        room:  a RectangularRoom object.
+        speed: a float (speed > 0)
+        """
+        self.room = room 
+        self.speed = speed 
+        self.position = room.getRandomPosition()
+        self.direction = random.randint(0, 359)
+        
