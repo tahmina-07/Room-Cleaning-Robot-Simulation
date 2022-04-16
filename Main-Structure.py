@@ -153,4 +153,13 @@ class Robot(object):
         self.speed = speed 
         self.position = room.getRandomPosition()
         self.direction = random.randint(0, 359)
+    
+    
+    def getRobotPosition(self):
+        """
+        Return the position of the robot.
+
+        returns: a Position object giving the robot's position.
+        """
+        return self.position
         
