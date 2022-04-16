@@ -171,3 +171,11 @@ class Robot(object):
         degrees, 0 <= d < 360.
         """
         return self.direction
+    
+    def setRobotPosition(self, position):
+        """
+        Set the position of the robot to POSITION.
+
+        position: a Position object.
+        """
+        self.position = position
