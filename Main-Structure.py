@@ -117,3 +117,13 @@ class RectangularRoom(object):
         returns: an integer
         """
         return len(self.cleaned_tiles)
+     def getRandomPosition(self):
+        """
+        Return a random position inside the room.
+
+        returns: a Position object.
+        """
+        r_x = random.uniform(0, self.width)
+        r_y = random.uniform(0, self.height)
+        
+        return Position(r_x, r_y)
