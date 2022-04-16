@@ -82,8 +82,8 @@ class RectangularRoom(object):
         #create a point 
         position = (int(pos.getX()), int(pos.getY))  
         #check if the point is in the isTileCleaned class if not added 
-        if position is not self.isTileCleaned:
-            self.isTileCleaned.append(position)
+        if position not in self.cleaned_tiles:
+            self.cleaned_tiles.append(position)
 
       def isTileCleaned(self, m, n):
         """
@@ -127,3 +127,14 @@ class RectangularRoom(object):
         r_y = random.uniform(0, self.height)
         
         return Position(r_x, r_y)
+     def isPositionInRoom(self, pos):
+        """
+        Return True if pos is inside the room.
+
+        pos: a Position object.
+        returns: True if pos is in the room, False otherwise.
+        """
+        if pos.x >= 0 and pos.x < self.width and pos.y >= 0 and pos.y < self.height:
+            return True
+        else:
+            return False 
