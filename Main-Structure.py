@@ -109,3 +109,11 @@ class RectangularRoom(object):
         returns: an integer
         """
         return self.height * self.width
+    
+      def getNumCleanedTiles(self):
+        """
+        Return the total number of clean tiles in the room.
+
+        returns: an integer
+        """
+        return len(self.cleaned_tiles)
