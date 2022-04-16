@@ -162,4 +162,12 @@ class Robot(object):
         returns: a Position object giving the robot's position.
         """
         return self.position
-        
+    
+    def getRobotDirection(self):
+        """
+        Return the direction of the robot.
+
+        returns: an integer d giving the direction of the robot as an angle in
+        degrees, 0 <= d < 360.
+        """
+        return self.direction
