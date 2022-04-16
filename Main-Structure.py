@@ -84,3 +84,21 @@ class RectangularRoom(object):
         #check if the point is in the isTileCleaned class if not added 
         if position is not self.isTileCleaned:
             self.isTileCleaned.append(position)
+
+      def isTileCleaned(self, m, n):
+        """
+        Return True if the tile (m, n) has been cleaned.
+
+        m: an integer
+        n: an integer
+        returns: True if (m, n) is cleaned, False otherwise
+        """
+        self.m = m
+        self.n = n
+        
+        point = (self.m, self.n)
+        if point in  self.cleaned_tiles:
+            return True 
+        else:
+            return False 
+            
