@@ -179,3 +179,11 @@ class Robot(object):
         position: a Position object.
         """
         self.position = position
+    
+     def setRobotDirection(self, direction):
+        """
+        Set the direction of the robot to DIRECTION.
+
+        direction: integer representing an angle in degrees
+        """
+        self.direction = direction 
