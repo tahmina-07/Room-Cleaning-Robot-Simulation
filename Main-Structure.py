@@ -101,4 +101,11 @@ class RectangularRoom(object):
             return True 
         else:
             return False 
-            
+    
+      def getNumTiles(self):
+        """
+        Return the total number of tiles in the room.
+
+        returns: an integer
+        """
+        return self.height * self.width
