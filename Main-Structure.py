@@ -244,5 +244,66 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
                continue
     return sum(results)/len(results)
    
-      
+class RandomWalkRobot(Robot):
+    """
+    A RandomWalkRobot is a robot with the "random walk" movement strategy: it
+    chooses a new direction at random at the end of each time-step.
+    """
+    def updatePositionAndClean(self):
+        """
+        Simulate the passage of a single time-step.
+        """
+        next_position = self.getRobotPosition().getNewPosition(self.getRobotDirection(), self.speed)
+        if self.room.isPositionInRoom(next_position) == False:
+           self.setRobotDirection(random.randint(0, 359))
+        else:
+           self.setRobotPosition(next_position) 
+           self.setRobotDirection(random.randint(0, 359))           
+           self.room.cleanTileAtPosition(next_position)
+        
+
+
+def showPlot1(title, x_label, y_label):
+  
+    num_robot_range = range(1, 11)
+    times1 = []
+    times2 = []
+    for num_robots in num_robot_range:
+        print("Plotting", num_robots, "robots...")
+        times1.append(runSimulation(num_robots, 1.0, 20, 20, 0.8, 20, StandardRobot))
+        times2.append(runSimulation(num_robots, 1.0, 20, 20, 0.8, 20, RandomWalkRobot))
+    pylab.plot(num_robot_range, times1)
+    pylab.plot(num_robot_range, times2)
+    pylab.title(title)
+    pylab.legend(('StandardRobot', 'RandomWalkRobot'))
+    pylab.xlabel(x_label)
+    pylab.ylabel(y_label)
+    pylab.show()
+
+    
+def showPlot2(title, x_label, y_label):
+    
+    aspect_ratios = []
+    times1 = []
+    times2 = []
+    for width in [10, 20, 25, 50]:
+        height = 300//width
+        print("Plotting cleaning time for a room of width:", width, "by height:", height)
+        aspect_ratios.append(float(width) / height)
+        times1.append(runSimulation(2, 1.0, width, height, 0.8, 200, StandardRobot))
+        times2.append(runSimulation(2, 1.0, width, height, 0.8, 200, RandomWalkRobot))
+    pylab.plot(aspect_ratios, times1)
+    pylab.plot(aspect_ratios, times2)
+    pylab.title(title)
+    pylab.legend(('StandardRobot', 'RandomWalkRobot'))
+    pylab.xlabel(x_label)
+    pylab.ylabel(y_label)
+    pylab.show()
+    
+
+
+print(showPlot1("Time It Takes 1 - 10 Robots To Clean 80% Of A Room", "Number of Robots", "Time Steps"))
+
+
+print(showPlot2("Time It Takes Two Robots To Clean 80% Of Variously Shaped Rooms", "Aspect Ratio ", "Time-steps"))      
 
