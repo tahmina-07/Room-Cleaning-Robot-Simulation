@@ -187,3 +187,25 @@ class Robot(object):
         direction: integer representing an angle in degrees
         """
         self.direction = direction 
+
+class StandardRobot(Robot):
+    """
+    A StandardRobot is a Robot with the standard movement strategy.
+
+    At each time-step, a StandardRobot attempts to move in its current
+    direction; when it would hit a wall, it *instead* chooses a new direction
+    randomly.
+    """
+    def updatePositionAndClean(self):
+        """
+        Simulate the passage of a single time-step.
+
+        Move the robot to a new position and mark the tile it is on as having
+        been cleaned.
+        """
+        next_position = self.getRobotPosition().getNewPosition(self.getRobotDirection(), self.speed)
+        if self.room.isPositionInRoom(next_position) == False:
+           self.setRobotDirection(random.randint(0, 359))
+        else:
+           self.setRobotPosition(next_position)            
+           self.room.cleanTileAtPosition(next_position)
